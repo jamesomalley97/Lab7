@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from "@angular/forms";
+import { MovieServiceService} from '../Services/movie-service.service';
 
 @Component({
   selector: 'app-create',
@@ -8,17 +9,23 @@ import { NgForm } from "@angular/forms";
 })
 export class CreateComponent implements OnInit {
 
-  constructor() { }
+
+
+  constructor(private movieService:MovieServiceService) { }
 
   ngOnInit() {
   }
 
   onAddMovie(form: NgForm) {
+     console.log(form.value);
 
-    //this.service.addPost(form.value.title, form.value.content).subscribe();
+     this.movieService.AddMovieInformation(form.value.title,
+      form.value.year, form.value.poster).subscribe();
+      console.log(form.value);
     
-    console.log(form.value);
-    form.resetForm();
+      form.resetForm();
   }
+
+  
 
 }
